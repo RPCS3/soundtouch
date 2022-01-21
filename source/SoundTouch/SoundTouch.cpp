@@ -528,6 +528,17 @@ uint SoundTouch::receiveSamples(uint maxSamples)
     return ret;
 }
 
+// Returns a pointer to the beginning of the currently non-outputted samples.
+// This function is provided for accessing the output samples directly.
+// Please be careful!
+//
+// When using this function to output samples, also remember to 'remove' the
+// outputted samples from the buffer by calling the
+// 'receiveSamples(numSamples)' function
+SAMPLETYPE *SoundTouch::bufBegin()
+{
+    return pTDStretch->getOutput()->ptrBegin();
+}
 
 /// Get ratio between input and output audio durations, useful for calculating
 /// processed output duration: if you'll process a stream of N samples, then

@@ -306,6 +306,15 @@ public:
     virtual uint receiveSamples(uint maxSamples   ///< Remove this many samples from the beginning of pipe.
         ) override;
 
+    /// Returns a pointer to the beginning of the output samples.
+    /// This function is provided for accessing the output samples directly.
+    /// Please be careful for not to corrupt the book-keeping!
+    ///
+    /// When using this function to output samples, also remember to 'remove' the
+    /// output samples from the buffer by calling the
+    /// 'receiveSamples(numSamples)' function
+    SAMPLETYPE *bufBegin();
+
     /// Clears all the samples in the object's output and internal processing
     /// buffers.
     virtual void clear() override;
