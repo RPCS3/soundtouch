@@ -47,13 +47,6 @@ typedef unsigned long   ulong;
 #define SOUNDTOUCH_ALIGN_POINTER_16(x)      ( ( (ulongptr)(x) + 15 ) & ~(ulongptr)15 )
 
 
-#if (defined(__GNUC__) && !defined(ANDROID))
-    // In GCC, include soundtouch_config.h made by config scritps.
-    // Skip this in Android compilation that uses GCC but without configure scripts.
-    #include "soundtouch_config.h"
-#endif
-
-
 namespace soundtouch
 {
     /// Max allowed number of channels
@@ -70,13 +63,6 @@ namespace soundtouch
     /// the dedicated mono/stereo processing routines will result in slower
     /// runtime performance so recommendation is to keep this off.
     // #define USE_MULTICH_ALWAYS
-
-    #if (defined(__SOFTFP__) && defined(ANDROID))
-        // For Android compilation: Force use of Integer samples in case that
-        // compilation uses soft-floating point emulation - soft-fp is way too slow
-        #undef  SOUNDTOUCH_FLOAT_SAMPLES
-        #define SOUNDTOUCH_INTEGER_SAMPLES      1
-    #endif
 
     #if !(SOUNDTOUCH_INTEGER_SAMPLES || SOUNDTOUCH_FLOAT_SAMPLES)
 
@@ -99,28 +85,6 @@ namespace soundtouch
 
     #endif
 
-    #if (_M_IX86 || __i386__ || __x86_64__ || _M_X64)
-        /// Define this to allow X86-specific assembler/intrinsic optimizations.
-        /// Notice that library contains also usual C++ versions of each of these
-        /// these routines, so if you're having difficulties getting the optimized
-        /// routines compiled for whatever reason, you may disable these optimizations
-        /// to make the library compile.
-
-        #define SOUNDTOUCH_ALLOW_X86_OPTIMIZATIONS     1
-
-        /// In GNU environment, allow the user to override this setting by
-        /// giving the following switch to the configure script:
-        /// ./configure --disable-x86-optimizations
-        /// ./configure --enable-x86-optimizations=no
-        #ifdef SOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS
-            #undef SOUNDTOUCH_ALLOW_X86_OPTIMIZATIONS
-        #endif
-    #else
-        /// Always disable optimizations when not using a x86 systems.
-        #undef SOUNDTOUCH_ALLOW_X86_OPTIMIZATIONS
-
-    #endif
-
     // If defined, allows the SIMD-optimized routines to skip unevenly aligned
     // memory offsets that can cause performance penalty in some SIMD implementations.
     // Causes slight compromise in sound quality.
@@ -138,13 +102,6 @@ namespace soundtouch
             #error "conflicting sample types defined"
         #endif // SOUNDTOUCH_FLOAT_SAMPLES
 
-        #ifdef SOUNDTOUCH_ALLOW_X86_OPTIMIZATIONS
-            // Allow MMX optimizations (not available in X64 mode)
-            #if (!_M_X64)
-                #define SOUNDTOUCH_ALLOW_MMX   1
-            #endif
-        #endif
-
     #else
 
         // floating point samples
@@ -152,11 +109,6 @@ namespace soundtouch
         // data type for sample accumulation: Use float also here to enable
         // efficient autovectorization
         typedef float LONG_SAMPLETYPE;
-
-        #ifdef SOUNDTOUCH_ALLOW_X86_OPTIMIZATIONS
-            // Allow SSE optimizations
-            #define SOUNDTOUCH_ALLOW_SSE       1
-        #endif
 
     #endif  // SOUNDTOUCH_INTEGER_SAMPLES
 
