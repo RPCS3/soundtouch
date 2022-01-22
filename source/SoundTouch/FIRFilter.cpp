@@ -298,32 +298,18 @@ void * FIRFilter::operator new(size_t s)
 
 FIRFilter * FIRFilter::newInstance()
 {
-    uint uExtensions;
-
-    uExtensions = detectCPUextensions();
-
     // Check if MMX/SSE instruction set extensions supported by CPU
 
 #ifdef SOUNDTOUCH_ALLOW_MMX
-    // MMX routines available only with integer sample types
-    if (uExtensions & SUPPORT_MMX)
-    {
-        return ::new FIRFilterMMX;
-    }
-    else
+    // MMX routines available only with integer sample type
+    return ::new FIRFilterMMX;
 #endif // SOUNDTOUCH_ALLOW_MMX
 
 #ifdef SOUNDTOUCH_ALLOW_SSE
-    if (uExtensions & SUPPORT_SSE)
-    {
-        // SSE support
-        return ::new FIRFilterSSE;
-    }
-    else
+    // SSE support
+    return ::new FIRFilterSSE;
 #endif // SOUNDTOUCH_ALLOW_SSE
 
-    {
-        // ISA optimizations not supported, use plain C version
-        return ::new FIRFilter;
-    }
+    // ISA optimizations not supported, use plain C version
+    return ::new FIRFilter;
 }
