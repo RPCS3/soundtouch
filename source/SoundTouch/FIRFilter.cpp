@@ -282,29 +282,20 @@ void * FIRFilter::operator new(size_t)
 
 FIRFilter * FIRFilter::newInstance()
 {
-    uint uExtensions;
-
-    uExtensions = detectCPUextensions();
-    (void)uExtensions;
-
     // Check if MMX/SSE instruction set extensions supported by CPU
 
 #ifdef SOUNDTOUCH_ALLOW_MMX
     // MMX routines available only with integer sample types
-    if (uExtensions & SUPPORT_MMX)
     {
         return ::new FIRFilterMMX;
     }
-    else
 #endif // SOUNDTOUCH_ALLOW_MMX
 
 #ifdef SOUNDTOUCH_ALLOW_SSE
-    if (uExtensions & SUPPORT_SSE)
     {
         // SSE support
         return ::new FIRFilterSSE;
     }
-    else
 #endif // SOUNDTOUCH_ALLOW_SSE
 
     {
