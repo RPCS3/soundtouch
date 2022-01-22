@@ -33,6 +33,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#if 0
 #ifndef _CPU_DETECT_H_
 #define _CPU_DETECT_H_
 
@@ -53,3 +54,4 @@ uint detectCPUextensions(void);
 void disableExtensions(uint wDisableMask);
 
 #endif  // _CPU_DETECT_H_
+#endif
