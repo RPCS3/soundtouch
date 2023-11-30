@@ -224,13 +224,9 @@ uint FIFOSampleBuffer::receiveSamples(SAMPLETYPE *output, uint maxSamples)
 // the sample buffer with the 'ptrBegin' function.
 uint FIFOSampleBuffer::receiveSamples(uint maxSamples)
 {
-    if (maxSamples >= samplesInBuffer)
+    if (maxSamples > samplesInBuffer)
     {
-        uint temp;
-
-        temp = samplesInBuffer;
-        samplesInBuffer = 0;
-        return temp;
+        maxSamples = samplesInBuffer;
     }
 
     samplesInBuffer -= maxSamples;
