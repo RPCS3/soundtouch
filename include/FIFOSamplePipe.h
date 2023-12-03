@@ -88,11 +88,11 @@ public:
     void moveSamples(FIFOSamplePipe &other  ///< Other pipe instance where from the receive the data.
          )
     {
-        int oNumSamples = other.numSamples();
+        const uint oNumSamples = other.numSamples();
 
         putSamples(other.ptrBegin(), oNumSamples);
         other.receiveSamples(oNumSamples);
-    };
+    }
 
     /// Output samples from beginning of the sample buffer. Copies requested samples to 
     /// output buffer and removes them from the sample buffer. If there are less than 
