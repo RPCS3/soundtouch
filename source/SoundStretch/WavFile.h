@@ -40,7 +40,12 @@
 #ifndef WAVFILE_H
 #define WAVFILE_H
 
-#include <stdio.h>
+#include <cstdio>
+#include <string>
+#include "SS_CharTypes.h"
+
+namespace soundstretch
+{
 
 #ifndef uint
 typedef unsigned int uint;
@@ -145,7 +150,7 @@ private:
 public:
     /// Constructor: Opens the given WAV file. If the file can't be opened,
     /// throws 'runtime_error' exception.
-    WavInFile(const char *filename);
+    WavInFile(const STRING& filename);
 
     WavInFile(FILE *file);
 
@@ -241,7 +246,7 @@ private:
 public:
     /// Constructor: Creates a new WAV file. Throws a 'runtime_error' exception 
     /// if file creation fails.
-    WavOutFile(const char *fileName,    ///< Filename
+    WavOutFile(const STRING& fileName,  ///< Filename
                int sampleRate,          ///< Sample rate (e.g. 44100 etc)
                int bits,                ///< Bits per sample (8 or 16 bits)
                int channels             ///< Number of channels (1=mono, 2=stereo)
@@ -270,5 +275,7 @@ public:
                int numElems             ///< How many array items are to be written to file.
                );
 };
+
+ }
 
 #endif

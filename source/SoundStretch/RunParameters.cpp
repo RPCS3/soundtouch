@@ -30,15 +30,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "RunParameters.h"
 
 using namespace std;
 
+namespace soundstretch
+{
+
 // Program usage instructions 
 
-static const char licenseText[] = 
+static const char licenseText[] =
     "    LICENSE:\n"
     "    ========\n"
     "    \n"
@@ -61,12 +64,12 @@ static const char licenseText[] =
     "This application is distributed with full source codes; however, if you\n"
     "didn't receive them, please visit the author's homepage (see the link above).";
 
-static const char whatText[] = 
+static const char whatText[] =
     "This application processes WAV audio files by modifying the sound tempo,\n"
     "pitch and playback rate properties independently from each other.\n"
     "\n";
 
-static const char usage[] = 
+static const char usage[] =
     "Usage :\n"
     "    soundstretch infilename outfilename [switches]\n"
     "\n"
@@ -94,9 +97,8 @@ static int _toLowerCase(int c)
     return c;
 }
 
-
 // Constructor
-RunParameters::RunParameters(const int nParams, const char * const paramStr[])
+RunParameters::RunParameters(int nParams, const CHARTYPE* paramStr[])
 {
     int i;
     int nFirstParam;
@@ -112,28 +114,17 @@ RunParameters::RunParameters(const int nParams, const char * const paramStr[])
         }
         string msg = whatText;
         msg += usage;
-        ST_THROW_RT_ERROR(msg.c_str());
+        throw(msg);
     }
 
-    inFileName = nullptr;
-    outFileName = nullptr;
-    tempoDelta = 0;
-    pitchDelta = 0;
-    rateDelta = 0;
-    quick = 0;
-    noAntiAlias = 0;
-    goalBPM = 0;
-    speech = false;
-    detectBPM = false;
-
     // Get input & output file names
-    inFileName = (char*)paramStr[1];
-    outFileName = (char*)paramStr[2];
+    inFileName = paramStr[1];
+    outFileName = paramStr[2];
 
     if (outFileName[0] == '-')
     {
-        // no outputfile name was given but parameters
-        outFileName = nullptr;
+        // outputfile name was omitted but other parameter switches given instead
+        outFileName = STRING_CONST("");
         nFirstParam = 2;
     }
     else
@@ -182,25 +173,33 @@ void RunParameters::checkLimits()
     }
 }
 
-
-// Unknown switch parameter -- throws an exception with an error message
-void RunParameters::throwIllegalParamExp(const string &str) const
+// Convert STRING to std::string. Actually needed only if STRING is std::wstring, but conversion penalty is negligible
+std::string convertString(const STRING& str)
 {
-    string msg = "ERROR : Illegal parameter \"";
-    msg += str;
-    msg += "\".\n\n";
-    msg += usage;
-    ST_THROW_RT_ERROR(msg.c_str());
+    std::string res;
+    for (auto c : str)
+    {
+        res += (char)c;
+    }
+    return res;
 }
 
+// Unknown switch parameter -- throws an exception with an error message
+void RunParameters::throwIllegalParamExp(const STRING &str) const
+{
+    string msg = "ERROR : Illegal parameter \"";
+    msg += convertString(str);
+    msg += "\".\n\n";
+    msg += usage;
+    ST_THROW_RT_ERROR(msg);
+}
 
 void RunParameters::throwLicense() const
 {
     ST_THROW_RT_ERROR(licenseText);
 }
 
-
-float RunParameters::parseSwitchValue(const string &str) const
+float RunParameters::parseSwitchValue(const STRING& str) const
 {
     int pos;
 
@@ -212,14 +211,14 @@ float RunParameters::parseSwitchValue(const string &str) const
     }
 
     // Read numerical parameter value after '='
-    return (float)atof(str.substr(pos + 1).c_str());
+    return (float)stof(str.substr(pos + 1).c_str());
 }
 
 
 // Interprets a single switch parameter string of format "-switch=xx"
 // Valid switches are "-tempo=xx", "-pitch=xx" and "-rate=xx". Stores
 // switch values into 'params' structure.
-void RunParameters::parseSwitchParam(const string &str)
+void RunParameters::parseSwitchParam(const STRING& str)
 {
     int upS;
 
@@ -288,4 +287,6 @@ void RunParameters::parseSwitchParam(const string &str)
             // unknown switch
             throwIllegalParamExp(str);
     }
+}
+
 }
