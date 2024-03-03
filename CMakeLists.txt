@@ -4,11 +4,17 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(GNUInstallDirs)
 
+set(COMPILE_OPTIONS)
+
 if(MSVC)
   set(COMPILE_DEFINITIONS /O2 /fp:fast)
-  set(COMPILE_OPTIONS )
 else()
-  set(COMPILE_OPTIONS -Ofast -Wall -Wextra -Wzero-as-null-pointer-constant -Wno-unknown-pragmas)
+  list(APPEND COMPILE_OPTIONS -Wall -Wextra -Wzero-as-null-pointer-constant -Wno-unknown-pragmas)
+  if(EMSCRIPTEN)
+    list(APPEND COMPILE_OPTIONS -O3)
+  else()
+    list(APPEND COMPILE_OPTIONS -Ofast)
+  endif()
 endif()
 
 #####################
