@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 ///
-/// SoundTouch DLL wrapper - wraps SoundTouch routines into a Dynamic Load 
+/// SoundTouch DLL wrapper - wraps SoundTouch routines into a Dynamic Load
 /// Library interface.
 ///
 /// Author        : Copyright (c) Olli Parviainen
@@ -75,7 +75,7 @@ SOUNDTOUCHDLL_API void __cdecl soundtouch_destroyInstance(HANDLE h);
 /// Get SoundTouch library version string
 SOUNDTOUCHDLL_API const char *__cdecl soundtouch_getVersionString();
 
-/// Get SoundTouch library version string - alternative function for 
+/// Get SoundTouch library version string - alternative function for
 /// environments that can't properly handle character string as return value
 SOUNDTOUCHDLL_API void __cdecl soundtouch_getVersionString2(char* versionString, int bufferSize);
 
@@ -102,7 +102,7 @@ SOUNDTOUCHDLL_API void __cdecl soundtouch_setTempoChange(HANDLE h, float newTemp
 /// represent lower pitches, larger values higher pitch.
 SOUNDTOUCHDLL_API void __cdecl soundtouch_setPitch(HANDLE h, float newPitch);
 
-/// Sets pitch change in octaves compared to the original pitch  
+/// Sets pitch change in octaves compared to the original pitch
 /// (-1.00 .. +1.00);
 SOUNDTOUCHDLL_API void __cdecl soundtouch_setPitchOctaves(HANDLE h, float newPitch);
 
@@ -132,7 +132,7 @@ SOUNDTOUCHDLL_API int __cdecl soundtouch_flush(HANDLE h);
 SOUNDTOUCHDLL_API int __cdecl soundtouch_putSamples(HANDLE h,
         const float *samples,       ///< Pointer to sample buffer.
         unsigned int numSamples     ///< Number of sample frames in buffer. Notice
-                                    ///< that in case of multi-channel sound a single 
+                                    ///< that in case of multi-channel sound a single
                                     ///< sample frame contains data for all channels.
 );
 
@@ -141,7 +141,7 @@ SOUNDTOUCHDLL_API int __cdecl soundtouch_putSamples(HANDLE h,
 SOUNDTOUCHDLL_API void __cdecl soundtouch_putSamples_i16(HANDLE h,
         const short *samples,       ///< Pointer to sample buffer.
         unsigned int numSamples     ///< Number of sample frames in buffer. Notice
-                                    ///< that in case of multi-channel sound a single 
+                                    ///< that in case of multi-channel sound a single
                                     ///< sample frame contains data for all channels.
 );
 
@@ -152,9 +152,9 @@ SOUNDTOUCHDLL_API void __cdecl soundtouch_clear(HANDLE h);
 
 /// Changes a setting controlling the processing system behaviour. See the
 /// 'SETTING_...' defines for available setting ID's.
-/// 
+///
 /// \return 'nonzero' if the setting was successfully changed, otherwise zero
-SOUNDTOUCHDLL_API int __cdecl soundtouch_setSetting(HANDLE h, 
+SOUNDTOUCHDLL_API int __cdecl soundtouch_setSetting(HANDLE h,
         int settingId,   ///< Setting ID number. see SETTING_... defines.
         int value        ///< New setting value.
 );
@@ -163,7 +163,7 @@ SOUNDTOUCHDLL_API int __cdecl soundtouch_setSetting(HANDLE h,
 /// 'SETTING_...' defines for available setting ID's.
 ///
 /// \return the setting value.
-SOUNDTOUCHDLL_API int __cdecl soundtouch_getSetting(HANDLE h, 
+SOUNDTOUCHDLL_API int __cdecl soundtouch_getSetting(HANDLE h,
         int settingId    ///< Setting ID number, see SETTING_... defines.
 );
 
@@ -171,12 +171,12 @@ SOUNDTOUCHDLL_API int __cdecl soundtouch_getSetting(HANDLE h,
 /// Returns number of samples currently unprocessed.
 SOUNDTOUCHDLL_API unsigned int __cdecl soundtouch_numUnprocessedSamples(HANDLE h);
 
-/// Adjusts book-keeping so that given number of samples are removed from beginning of the 
-/// sample buffer without copying them anywhere. 
+/// Adjusts book-keeping so that given number of samples are removed from beginning of the
+/// sample buffer without copying them anywhere.
 ///
 /// Used to reduce the number of samples in the buffer when accessing the sample buffer directly
 /// with 'ptrBegin' function.
-SOUNDTOUCHDLL_API unsigned int __cdecl soundtouch_receiveSamples(HANDLE h, 
+SOUNDTOUCHDLL_API unsigned int __cdecl soundtouch_receiveSamples(HANDLE h,
         float *outBuffer,           ///< Buffer where to copy output samples.
         unsigned int maxSamples     ///< How many samples to receive at max.
 );
@@ -202,7 +202,7 @@ SOUNDTOUCHDLL_API HANDLE __cdecl bpm_createInstance(int numChannels, int sampleR
 SOUNDTOUCHDLL_API void __cdecl bpm_destroyInstance(HANDLE h);
 
 /// Feed 'numSamples' sample frames from 'samples' into the BPM detector.
-SOUNDTOUCHDLL_API void __cdecl bpm_putSamples(HANDLE h, 
+SOUNDTOUCHDLL_API void __cdecl bpm_putSamples(HANDLE h,
         const float *samples,           ///< Pointer to sample buffer.
         unsigned int numSamples         ///< Number of samples in buffer. Notice
                                         ///< that in case of stereo-sound a single sample
@@ -211,7 +211,7 @@ SOUNDTOUCHDLL_API void __cdecl bpm_putSamples(HANDLE h,
 
 /// Feed 'numSamples' sample frames from 'samples' into the BPM detector.
 /// 16bit int sample format version.
-SOUNDTOUCHDLL_API void __cdecl bpm_putSamples_i16(HANDLE h, 
+SOUNDTOUCHDLL_API void __cdecl bpm_putSamples_i16(HANDLE h,
         const short *samples,           ///< Pointer to sample buffer.
         unsigned int numSamples         ///< Number of samples in buffer. Notice
                                         ///< that in case of stereo-sound a single sample
@@ -225,11 +225,11 @@ SOUNDTOUCHDLL_API void __cdecl bpm_putSamples_i16(HANDLE h,
 /// \return Beats-per-minute rate, or zero if detection failed.
 SOUNDTOUCHDLL_API float __cdecl bpm_getBpm(HANDLE h);
 
-/// Get beat position arrays. Note: The array includes also really low beat detection values 
+/// Get beat position arrays. Note: The array includes also really low beat detection values
 /// in absence of clear strong beats. Consumer may wish to filter low values away.
 /// - "pos" receive array of beat positions
 /// - "values" receive array of beat detection strengths
-/// - max_num indicates max.size of "pos" and "values" array.  
+/// - max_num indicates max.size of "pos" and "values" array.
 ///
 /// You can query a suitable array sized by calling this with nullptr in "pos" & "values".
 ///

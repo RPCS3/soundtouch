@@ -1,13 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 ///
-/// General FIR digital filter routines with MMX optimization. 
+/// General FIR digital filter routines with MMX optimization.
 ///
-/// Notes : MMX optimized functions reside in a separate, platform-specific file, 
+/// Notes : MMX optimized functions reside in a separate, platform-specific file,
 /// e.g. 'mmx_win.cpp' or 'mmx_gcc.cpp'
 ///
 /// This source file contains OpenMP optimizations that allow speeding up the
-/// corss-correlation algorithm by executing it in several threads / CPU cores 
-/// in parallel. See the following article link for more detailed discussion 
+/// corss-correlation algorithm by executing it in several threads / CPU cores
+/// in parallel. See the following article link for more detailed discussion
 /// about SoundTouch OpenMP optimizations:
 /// http://www.softwarecoven.com/parallel-computing-in-embedded-mobile-devices
 ///
@@ -84,7 +84,7 @@ uint FIRFilter::evaluateFilterStereo(SAMPLETYPE *dest, const SAMPLETYPE *src, ui
     end = 2 * (numSamples - ilength);
 
     #pragma omp parallel for
-    for (j = 0; j < end; j += 2) 
+    for (j = 0; j < end; j += 2)
     {
         const SAMPLETYPE *ptr;
         LONG_SAMPLETYPE suml, sumr;
@@ -186,7 +186,7 @@ uint FIRFilter::evaluateFilterMulti(SAMPLETYPE *dest, const SAMPLETYPE *src, uin
                 ptr ++;
             }
         }
-        
+
         for (c = 0; c < numChannels; c ++)
         {
 #ifdef SOUNDTOUCH_INTEGER_SAMPLES
@@ -242,11 +242,11 @@ uint FIRFilter::getLength() const
 }
 
 
-// Applies the filter to the given sequence of samples. 
+// Applies the filter to the given sequence of samples.
 //
-// Note : The amount of outputted samples is by value of 'filter_length' 
+// Note : The amount of outputted samples is by value of 'filter_length'
 // smaller than the amount of input samples.
-uint FIRFilter::evaluate(SAMPLETYPE *dest, const SAMPLETYPE *src, uint numSamples, uint numChannels) 
+uint FIRFilter::evaluate(SAMPLETYPE *dest, const SAMPLETYPE *src, uint numSamples, uint numChannels)
 {
     assert(length > 0);
     assert(lengthDiv8 * 8 == length);
@@ -257,7 +257,7 @@ uint FIRFilter::evaluate(SAMPLETYPE *dest, const SAMPLETYPE *src, uint numSample
     if (numChannels == 1)
     {
         return evaluateFilterMono(dest, src, numSamples);
-    } 
+    }
     else if (numChannels == 2)
     {
         return evaluateFilterStereo(dest, src, numSamples);
@@ -271,7 +271,7 @@ uint FIRFilter::evaluate(SAMPLETYPE *dest, const SAMPLETYPE *src, uint numSample
 }
 
 
-// Operator 'new' is overloaded so that it automatically creates a suitable instance 
+// Operator 'new' is overloaded so that it automatically creates a suitable instance
 // depending on if we've a MMX-capable CPU available or not.
 void * FIRFilter::operator new(size_t)
 {

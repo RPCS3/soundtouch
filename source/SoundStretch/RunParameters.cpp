@@ -39,7 +39,7 @@ using namespace std;
 namespace soundstretch
 {
 
-// Program usage instructions 
+// Program usage instructions
 
 static const char licenseText[] =
     "    LICENSE:\n"
@@ -90,7 +90,7 @@ static const char usage[] =
 // Converts a char into lower case
 static int _toLowerCase(int c)
 {
-    if (c >= 'A' && c <= 'Z') 
+    if (c >= 'A' && c <= 'Z')
     {
         c += 'a' - 'A';
     }
@@ -103,11 +103,11 @@ RunParameters::RunParameters(int nParams, const CHARTYPE* paramStr[])
     int i;
     int nFirstParam;
 
-    if (nParams < 3) 
+    if (nParams < 3)
     {
         // Too few parameters
-        if (nParams > 1 && paramStr[1][0] == '-' && 
-            _toLowerCase(paramStr[1][1]) == 'l') 
+        if (nParams > 1 && paramStr[1][0] == '-' &&
+            _toLowerCase(paramStr[1][1]) == 'l')
         {
             // '-license' switch
             throwLicense();
@@ -133,7 +133,7 @@ RunParameters::RunParameters(int nParams, const CHARTYPE* paramStr[])
     }
 
     // parse switch parameters
-    for (i = nFirstParam; i < nParams; i ++) 
+    for (i = nFirstParam; i < nParams; i ++)
     {
         parseSwitchParam(paramStr[i]);
     }
@@ -145,29 +145,29 @@ RunParameters::RunParameters(int nParams, const CHARTYPE* paramStr[])
 // Checks parameter limits
 void RunParameters::checkLimits()
 {
-    if (tempoDelta < -95.0f) 
+    if (tempoDelta < -95.0f)
     {
         tempoDelta = -95.0f;
-    } 
-    else if (tempoDelta > 5000.0f) 
+    }
+    else if (tempoDelta > 5000.0f)
     {
         tempoDelta = 5000.0f;
     }
 
-    if (pitchDelta < -60.0f) 
+    if (pitchDelta < -60.0f)
     {
         pitchDelta = -60.0f;
-    } 
-    else if (pitchDelta > 60.0f) 
+    }
+    else if (pitchDelta > 60.0f)
     {
         pitchDelta = 60.0f;
     }
 
-    if (rateDelta < -95.0f) 
+    if (rateDelta < -95.0f)
     {
         rateDelta = -95.0f;
-    } 
-    else if (rateDelta > 5000.0f) 
+    }
+    else if (rateDelta > 5000.0f)
     {
         rateDelta = 5000.0f;
     }
@@ -204,7 +204,7 @@ float RunParameters::parseSwitchValue(const STRING& str) const
     int pos;
 
     pos = (int)str.find_first_of('=');
-    if (pos < 0) 
+    if (pos < 0)
     {
         // '=' missing
         throwIllegalParamExp(str);
@@ -222,7 +222,7 @@ void RunParameters::parseSwitchParam(const STRING& str)
 {
     int upS;
 
-    if (str[0] != '-') 
+    if (str[0] != '-')
     {
         // leading hyphen missing => not a valid parameter
         throwIllegalParamExp(str);
@@ -232,7 +232,7 @@ void RunParameters::parseSwitchParam(const STRING& str)
     upS = _toLowerCase(str[1]);
 
     // interpret the switch name & operate accordingly
-    switch (upS) 
+    switch (upS)
     {
         case 't' :
             // switch '-tempo=xx'
@@ -255,7 +255,7 @@ void RunParameters::parseSwitchParam(const STRING& str)
             try
             {
                 goalBPM = parseSwitchValue(str);
-            } 
+            }
             catch (const runtime_error &)
             {
                 // illegal or missing bpm value => just calculate bpm

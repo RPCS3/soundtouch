@@ -1,12 +1,12 @@
  ////////////////////////////////////////////////////////////////////////////////
 ///
-/// Classes for easy reading & writing of WAV sound files. 
+/// Classes for easy reading & writing of WAV sound files.
 ///
 /// For big-endian CPU, define _BIG_ENDIAN_ during compile-time to correctly
 /// parse the WAV files with such processors.
-/// 
+///
 /// Admittingly, more complete WAV reader routines may exist in public domain,
-/// but the reason for 'yet another' one is that those generic WAV reader 
+/// but the reason for 'yet another' one is that those generic WAV reader
 /// libraries are exhaustingly large and cumbersome! Wanted to have something
 /// simpler here, i.e. something that's not already larger than rest of the
 /// SoundTouch/SoundStretch program...
@@ -67,9 +67,9 @@ static const char dataStr[] = "data";
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// Helper functions for swapping byte order to correctly read/write WAV files 
+// Helper functions for swapping byte order to correctly read/write WAV files
 // with big-endian CPU's: Define compile-time definition _BIG_ENDIAN_ to
-// turn-on the conversion if it appears necessary. 
+// turn-on the conversion if it appears necessary.
 //
 // For example, Intel x86 is little-endian and doesn't require conversion,
 // while PowerPC of Mac's and many other RISC cpu's are big-endian.
@@ -352,7 +352,7 @@ int WavInFile::read(short* buffer, int maxElems)
 }
 
 
-/// Read data in float format. Notice that when reading in float format 
+/// Read data in float format. Notice that when reading in float format
 /// 8/16/24/32 bit sample formats are supported
 int WavInFile::read(float* buffer, int maxElems)
 {
@@ -511,7 +511,7 @@ int WavInFile::readHeaderBlock()
     {
         int nLen, nDump;
 
-        // 'fmt ' block 
+        // 'fmt ' block
         memcpy(header.format.fmt, fmtStr, 4);
 
         // read length of the format field
@@ -519,7 +519,7 @@ int WavInFile::readHeaderBlock()
         // swap byte order if necessary
         _swap32(nLen);
 
-        // calculate how much length differs from expected 
+        // calculate how much length differs from expected
         nDump = nLen - ((int)sizeof(header.format) - 8);
 
         // verify that header length isn't smaller than expected structure
@@ -556,7 +556,7 @@ int WavInFile::readHeaderBlock()
     {
         int nLen, nDump;
 
-        // 'fact' block 
+        // 'fact' block
         memcpy(header.fact.fact_field, factStr, 4);
 
         // read length of the fact field

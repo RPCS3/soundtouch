@@ -56,7 +56,7 @@ namespace soundstretch
 // Macro for Win32 standard input/output stream support: Sets a file stream into binary mode
 #define SET_STREAM_TO_BIN_MODE(f) (_setmode(_fileno(f), _O_BINARY))
 #else
-    // Not needed for GNU environment... 
+    // Not needed for GNU environment...
 #define SET_STREAM_TO_BIN_MODE(f) {}
 #endif
 
@@ -107,7 +107,7 @@ static void openFiles(unique_ptr<WavInFile>& inFile, unique_ptr<WavOutFile>& out
 }
 
 
-// Sets the 'SoundTouch' object up according to input file sound format & 
+// Sets the 'SoundTouch' object up according to input file sound format &
 // command line parameters
 static void setup(SoundTouch& soundTouch, const WavInFile& inFile, const RunParameters& params)
 {
@@ -185,7 +185,7 @@ static void process(SoundTouch& soundTouch, WavInFile& inFile, WavOutFile& outFi
         // - 'receiveSamples' doesn't necessarily return any samples at all
         //   during some rounds!
         // - On the other hand, during some round 'receiveSamples' may have more
-        //   ready samples than would fit into 'sampleBuffer', and for this reason 
+        //   ready samples than would fit into 'sampleBuffer', and for this reason
         //   the 'receiveSamples' call is iterated for as many times as it
         //   outputs samples.
         do
@@ -217,9 +217,9 @@ static void detectBPM(WavInFile& inFile, RunParameters& params)
     fflush(stderr);
 
     const int nChannels = (int)inFile.getNumChannels();
-    int readSize = BUFF_SIZE - BUFF_SIZE % nChannels;   // round read size down to multiple of num.channels 
+    int readSize = BUFF_SIZE - BUFF_SIZE % nChannels;   // round read size down to multiple of num.channels
 
-    // Process the 'inFile' in small blocks, repeat until whole file has 
+    // Process the 'inFile' in small blocks, repeat until whole file has
     // been processed
     while (inFile.eof() == 0)
     {
