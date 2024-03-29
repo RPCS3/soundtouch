@@ -11,7 +11,7 @@ same time
 
 Visit [SoundTouch website](https://www.surina.net/soundtouch) and see the [README file](https://www.surina.net/soundtouch/readme.html) for more information and audio examples.
 
-### The latest stable release is 2.3.2
+### The latest stable release is 2.3.3
 
 ## Example
 
@@ -40,6 +40,7 @@ The source code package includes dynamic library import modules for C#, Java and
 ## Tarballs
 
 Source code release tarballs:
+* https://www.surina.net/soundtouch/soundtouch-2.3.3.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.2.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.1.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.0.tar.gz
