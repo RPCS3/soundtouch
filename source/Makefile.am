@@ -17,8 +17,9 @@
 
 include $(top_srcdir)/config/am_include.mk
 
-SUBDIRS=SoundTouch SoundStretch SoundTouchDLL
-
-# set to something if you want other stuff to be included in the distribution tarball
-#EXTRA_DIST=
-
+if SOUNDTOUCH_FLOAT_SAMPLES
+    # build SoundTouchDLL only if float samples used
+    SUBDIRS=SoundTouch SoundStretch SoundTouchDLL
+else
+    SUBDIRS=SoundTouch SoundStretch
+endif

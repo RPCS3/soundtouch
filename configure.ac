@@ -110,7 +110,6 @@ AC_ARG_ENABLE([neon-optimizations],
 # Note: We check if optimizations are supported a few lines down.
 AM_CONDITIONAL([X86_OPTIMIZATIONS], [test "x$enable_x86_optimizations" = "xyes"])
 
-
 if test "x$enable_integer_samples" = "xyes"; then
         echo "****** Integer sample type enabled ******"
         AC_DEFINE(SOUNDTOUCH_INTEGER_SAMPLES,1,[Use Integer as Sample type])
@@ -118,7 +117,7 @@ else
         echo "****** Float sample type enabled ******"
         AC_DEFINE(SOUNDTOUCH_FLOAT_SAMPLES,1,[Use Float as Sample type])
 fi
-
+AM_CONDITIONAL([SOUNDTOUCH_FLOAT_SAMPLES], [test "x$enable_integer_samples" != "xyes"])
 
 if test "x$enable_openmp" = "xyes"; then
         echo "****** openmp optimizations enabled ******"
