@@ -256,13 +256,17 @@ static void detectBPM(WavInFile& inFile, RunParameters& params)
     }
 }
 
+void printHelloText()
+{
+    SoundTouch soundTouch;
+    fprintf(stderr, _helloText, soundTouch.getVersionString());
+}
+
 void ss_main(RunParameters& params)
 {
     unique_ptr<WavInFile> inFile;
     unique_ptr<WavOutFile> outFile;
     SoundTouch soundTouch;
-
-    fprintf(stderr, _helloText, soundTouch.getVersionString());
 
     // Open input & output files
     openFiles(inFile, outFile, params);
@@ -299,6 +303,7 @@ int main(int argc, const char* args[])
 {
     try
     {
+        soundstretch::printHelloText();
         soundstretch::RunParameters params(argc, args);
         soundstretch::ss_main(params);
     }
