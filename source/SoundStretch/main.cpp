@@ -307,5 +307,10 @@ int main(int argc, const char* args[])
         fprintf(stderr, "%s\n", e.what());
         return -1;
     }
+    catch (const string& e)
+    {
+        fprintf(stderr, "%s\n", e.c_str());
+        return -1;
+    }
     return 0;
 }
