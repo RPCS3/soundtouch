@@ -155,7 +155,7 @@ uint FIRFilter::evaluateFilterMulti(SAMPLETYPE *dest, const SAMPLETYPE *src, uin
     assert(src != nullptr);
     assert(dest != nullptr);
     assert(filterCoeffs != nullptr);
-    assert(numChannels < 16);
+    assert(numChannels <= SOUNDTOUCH_MAX_CHANNELS);
 
     // hint compiler autovectorization that loop length is divisible by 8
     int ilength = length & -8;
