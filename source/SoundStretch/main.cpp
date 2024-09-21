@@ -145,9 +145,9 @@ static void setup(SoundTouch& soundTouch, const WavInFile& inFile, const RunPara
 #endif
         // print processing information only if outFileName given i.e. some processing will happen
         fprintf(stderr, "Processing the file with the following changes:\n");
-        fprintf(stderr, "  tempo change = %+g %%\n", params.tempoDelta);
-        fprintf(stderr, "  pitch change = %+g semitones\n", params.pitchDelta);
-        fprintf(stderr, "  rate change  = %+g %%\n\n", params.rateDelta);
+        fprintf(stderr, "  tempo change = %+lg %%\n", params.tempoDelta);
+        fprintf(stderr, "  pitch change = %+lg semitones\n", params.pitchDelta);
+        fprintf(stderr, "  rate change  = %+lg %%\n\n", params.rateDelta);
         fprintf(stderr, "Working...");
     }
     else
@@ -240,7 +240,7 @@ static void detectBPM(WavInFile& inFile, RunParameters& params)
 
     if (bpmValue > 0)
     {
-        fprintf(stderr, "Detected BPM rate %.1f\n\n", bpmValue);
+        fprintf(stderr, "Detected BPM rate %.1lf\n\n", bpmValue);
     }
     else
     {
@@ -252,7 +252,7 @@ static void detectBPM(WavInFile& inFile, RunParameters& params)
     {
         // adjust tempo to given bpm
         params.tempoDelta = (params.goalBPM / bpmValue - 1.0f) * 100.0f;
-        fprintf(stderr, "The file will be converted to %.1f BPM\n\n", params.goalBPM);
+        fprintf(stderr, "The file will be converted to %.1lf BPM\n\n", params.goalBPM);
     }
 }
 

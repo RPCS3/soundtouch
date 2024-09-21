@@ -199,7 +199,7 @@ void RunParameters::throwLicense() const
     ST_THROW_RT_ERROR(licenseText);
 }
 
-float RunParameters::parseSwitchValue(const STRING& str) const
+double RunParameters::parseSwitchValue(const STRING& str) const
 {
     int pos;
 
@@ -211,7 +211,7 @@ float RunParameters::parseSwitchValue(const STRING& str) const
     }
 
     // Read numerical parameter value after '='
-    return (float)stof(str.substr(pos + 1).c_str());
+    return stof(str.substr(pos + 1).c_str());
 }
 
 

@@ -48,17 +48,17 @@ private:
     void throwLicense() const;
     void parseSwitchParam(const STRING& str);
     void checkLimits();
-    float parseSwitchValue(const STRING& tr) const;
+    double parseSwitchValue(const STRING& tr) const;
 
 public:
     STRING inFileName;
     STRING outFileName;
-    float tempoDelta{ 0 };
-    float pitchDelta{ 0 };
-    float rateDelta{ 0 };
+    double tempoDelta{ 0 };
+    double pitchDelta{ 0 };
+    double rateDelta{ 0 };
     int   quick{ 0 };
     int   noAntiAlias{ 0 };
-    float goalBPM{ 0 };
+    double goalBPM{ 0 };
     bool  detectBPM{ false };
     bool  speech{ false };
 
