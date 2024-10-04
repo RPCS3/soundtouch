@@ -96,6 +96,7 @@ install(
     include/soundtouch_config.h
   DESTINATION
     "${CMAKE_INSTALL_INCLUDEDIR}/soundtouch"
+  COMPONENT SoundTouch
 )
 
 install(TARGETS SoundTouch
@@ -104,6 +105,7 @@ install(TARGETS SoundTouch
   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
   RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
   INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+  COMPONENT SoundTouch
 )
 
 #######################
@@ -126,6 +128,7 @@ if(SOUNDSTRETCH)
 
   install(TARGETS soundstretch
     DESTINATION bin
+    COMPONENT soundstretch
   )
 endif()
 
@@ -144,8 +147,8 @@ if(SOUNDTOUCH_DLL)
   target_compile_definitions(SoundTouchDLL PRIVATE DLL_EXPORTS)
   target_include_directories(SoundTouchDLL PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
   target_link_libraries(SoundTouchDLL PRIVATE SoundTouch)
-  install(FILES source/SoundTouchDLL/SoundTouchDLL.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/soundtouch")
-  install(TARGETS SoundTouchDLL EXPORT SoundTouchTargets)
+  install(FILES source/SoundTouchDLL/SoundTouchDLL.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/soundtouch" COMPONENT SoundTouchDLL)
+  install(TARGETS SoundTouchDLL EXPORT SoundTouchTargets COMPONENT SoundTouchDLL)
 endif()
 
 ########################
@@ -157,7 +160,7 @@ set(libdir "\${prefix}/${CMAKE_INSTALL_LIBDIR}")
 set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(VERSION "${CMAKE_PROJECT_VERSION}")
 configure_file(soundtouch.pc.in "${CMAKE_CURRENT_BINARY_DIR}/soundtouch.pc" @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/soundtouch.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/soundtouch.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig" COMPONENT SoundTouch)
 
 # CMake config
 include(CMakePackageConfigHelpers)
@@ -167,6 +170,7 @@ install(
   FILE SoundTouchTargets.cmake
   NAMESPACE SoundTouch::
   DESTINATION "${SOUNDTOUCH_INSTALL_CMAKEDIR}"
+  COMPONENT SoundTouch
 )
 configure_package_config_file(SoundTouchConfig.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/SoundTouchConfig.cmake"
@@ -182,4 +186,5 @@ install(
     "${CMAKE_CURRENT_BINARY_DIR}/SoundTouchConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/SoundTouchConfigVersion.cmake"
   DESTINATION "${SOUNDTOUCH_INSTALL_CMAKEDIR}"
+  COMPONENT SoundTouch
 )
