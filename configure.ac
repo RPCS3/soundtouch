@@ -31,9 +31,8 @@ AC_DISABLE_STATIC	dnl This makes libtool only build shared libs
 
 AC_LANG(C++)
 
-# Compiler flags. Apply -Ofast (implies -O3 -ffast-math) to allow gcc autovectorization
-# generate effective SIMD code.
-CXXFLAGS="${CXXFLAGS} -Ofast -Wall -Wextra -Wzero-as-null-pointer-constant -Wno-unknown-pragmas"
+# Compiler flags. Apply -ffast-math to allow compiler autovectorization generate effective SIMD code for arm compilation
+CXXFLAGS="${CXXFLAGS} -O3 -ffast-math -Wall -Wextra -Wzero-as-null-pointer-constant -Wno-unknown-pragmas"
 
 # Set AR_FLAGS to avoid build warning "ar: `u' modifier ignored since `D' is the default (see `U')"
 AR_FLAGS='cr'

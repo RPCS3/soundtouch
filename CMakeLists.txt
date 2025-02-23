@@ -13,7 +13,8 @@ else()
   if(EMSCRIPTEN)
     list(APPEND COMPILE_OPTIONS -O3)
   else()
-    list(APPEND COMPILE_OPTIONS -Ofast)
+    # Apply -ffast-math to allow compiler autovectorization generate effective SIMD code for arm compilation
+    list(APPEND COMPILE_OPTIONS -O3 -ffast-math)
   endif()
 endif()
 
