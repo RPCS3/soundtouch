@@ -11,7 +11,13 @@ same time
 
 Visit [SoundTouch website](https://www.surina.net/soundtouch) and see the [README file](https://www.surina.net/soundtouch/readme.html) for more information and audio examples.
 
-### The latest stable release is 2.3.3
+## Version
+
+**The latest stable release in Git is 2.4.0**
+
+See the [README file for change history](https://soundtouch.surina.net/README.html#changehistory)
+
+[![latest packaged version(s)](https://repology.org/badge/latest-versions/soundtouch.svg)](https://repology.org/project/soundtouch/versions)
 
 ## Example
 
@@ -21,7 +27,7 @@ Use SoundStretch example app for modifying wav audio files, for example as follo
 soundstretch my_original_file.wav output_file.wav -tempo=+15 -pitch=-3
 ```
 
-See the [README file](http://soundtouch.surina.net/README.html) for more usage examples and instructions how to build SoundTouch + SoundStretch.
+See the [README file](https://soundtouch.surina.net/README.html) for more usage examples and instructions how to build the software.
 
 Ready [SoundStretch application executables](https://www.surina.net/soundtouch/download.html) are available for download for Windows and Mac OS.
 
@@ -40,6 +46,7 @@ The source code package includes dynamic library import modules for C#, Java and
 ## Tarballs
 
 Source code release tarballs:
+* https://www.surina.net/soundtouch/soundtouch-2.4.0.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.3.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.2.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.1.tar.gz
