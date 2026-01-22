@@ -35,9 +35,9 @@
     #include <windows.h>
 
     // DLL main in Windows compilation
-    BOOL APIENTRY DllMain( HANDLE hModule,
+    BOOL APIENTRY DllMain([[maybe_unused]] HANDLE hModule,
                            DWORD  ul_reason_for_call,
-                           LPVOID lpReserved
+                           [[maybe_unused]] LPVOID lpReserved
                          )
     {
         switch (ul_reason_for_call)
