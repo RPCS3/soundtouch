@@ -13,7 +13,7 @@ Visit [SoundTouch website](https://www.surina.net/soundtouch) and see the [READM
 
 ## Version
 
-**The latest stable release in Git is 2.4.0**
+**The latest stable release in Git is 2.4.1**
 
 See the [README file for change history](https://soundtouch.surina.net/README.html#changehistory)
 
@@ -46,6 +46,7 @@ The source code package includes dynamic library import modules for C#, Java and
 ## Tarballs
 
 Source code release tarballs:
+* https://www.surina.net/soundtouch/soundtouch-2.4.1.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.4.0.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.3.tar.gz
 * https://www.surina.net/soundtouch/soundtouch-2.3.2.tar.gz

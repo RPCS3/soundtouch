@@ -608,8 +608,12 @@
     <hr>
     <a name="changehistory"><h2>5. Change History</h2></a>
     <h3>5.1. SoundTouch library Change History </h3>
-    <p><b>2.4.0:</b></p>
+    <p><b>2.4.1:</b></p>
     <ul class="current">
+        <li>Resolve buffer overflow in FIR filter when processing more than 16 channels</li>
+    </ul>
+    <p><b>2.4.0:</b></p>
+    <ul>
         <li>Set CMake minimum version to 3.5 to avoid deprecation warning</li>
         <li>Increase max nr. of channels from 16 to 32</li>
         <li>Don't use `pow()` when using integer precision samples</li>
@@ -1008,6 +1012,7 @@
       <li> Rémi Verschelde</li>
       <li> Katja Vetter</li>
       <li> Wu Q.</li>
+      <li> Olivier Laflamme</li>
     </ul>
     <p>Moral greetings to all other contributors and users also!</p>
     <hr>
